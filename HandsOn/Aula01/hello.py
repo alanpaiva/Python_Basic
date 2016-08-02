@@ -2,6 +2,12 @@
 
 print "Hello World"
 
+
+#git remote add github https://github.com/alenunes/Python_Basic.git
+#git push github master
+
+
+
 #Para fazer o commit
 #Configurar usuario
 #git config --global user.name "Alexander Nunes"

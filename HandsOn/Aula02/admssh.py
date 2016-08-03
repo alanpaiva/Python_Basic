@@ -57,7 +57,6 @@ def autenticar_usuario(login, senha):
             indice = usuarios.index(user)
             if usuarios[indice] == login and senhas[indice]==senha:
                 return True
-
     '''
     for i, u in enumerate(usuarios):
         if login==usuarios[i] and senha==senhas[i] :

@@ -1,5 +1,12 @@
 #!/usr/bin/python
 
+usuarios=[]
+senhas=[]
+servidores=[]
+
+
+
+
 
 def switch(x):
     dicionario_funcoes = {1:cadastrar_sysadmin,
@@ -14,19 +21,70 @@ def switch(x):
 
 
 def cadastrar_sysadmin():
-    print("Cadastrar sysadmin")
+    global usuarios
+    login = raw_input("Digite o usuario: ")
+    senha = raw_input("Digite a senha: ")
+
+    usuarios.append(login)
+    senhas.append(senha)
+    print("Sysadmin "+ login + " cadastrado")
+
+
 
 def listar_sysadmin():
-    print("Listar sysadmin")
+    global usuarios
+    #ENUMERATE (passando i) 
+    #serve para numerar  itens e retornar o numero e o item
+    for i,u in enumerate(usuarios):
+        print("%s - %s"%(i,u))
+
 
 def remover_sysadmin():
-    print("remover sysadmin")
+    global usuarios    
+    listar_sysadmin()
+    id = input("Digite o ID que deseja remover: ")
+    print("Usuario " + usuarios[id] + " removido")
+    usuarios.pop(id)
+    senhas.pop(id)
+
+
+def autenticar_usuario(login, senha):
+    global usuarios
+    global senhas
+
+    for user in usuarios:
+        if user==login:
+            indice = usuarios.index(user)
+            if usuarios[indice] == login and senhas[indice]==senha:
+                return True
+
+    '''
+    for i, u in enumerate(usuarios):
+        if login==usuarios[i] and senha==senhas[i] :
+            return True
+    '''
+    return False
+
+
 
 def cadastrar_servidor():
-    print("Cadastrar Servidor")
+    print("== Autenticar usuario ==")
+    login = raw_input("Digite o seu login: ")
+    senha = raw_input("Digite a sua senha: ")
+    if autenticar_usuario(login,senha):
+        servidor = raw_input("Digite o servidor: ")
+        servidores.append(servidor)
+        print ("Serrvidor " + servidor + " cadastrado")
+
+    else:
+        print "Falha na autenticacao!"
+
+
 
 def listar_servidor():
-    print("Listar Servidor")
+    global servidores
+    for s in servidores:
+        print(s)
 
 def remover_servidor():
     print("remover Servidor")

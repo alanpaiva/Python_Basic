@@ -8,15 +8,26 @@ servidores=[]
 
 
 
+
+
 def switch(x):
-    dicionario_funcoes = {1:cadastrar_sysadmin,
-                          2:listar_sysadmin,
-                          3:remover_sysadmin,
-                          4:cadastrar_servidor,
-                          5:listar_servidor,
-                          6:remover_servidor,
-                          7:sair}
-    dicionario_funcoes[x]()
+    try:
+        dicionario_funcoes = {1:cadastrar_sysadmin,
+                              2:listar_sysadmin,
+                              3:remover_sysadmin,
+                              4:cadastrar_servidor,
+                              5:listar_servidor,
+                              6:remover_servidor,
+                              7:sair}
+        dicionario_funcoes[x]()
+    except ValueError as e:
+        print "caracter Invalido"
+
+    except Exception as e:
+        print "Opcao Invalida"
+
+    finally:
+        print "Processando a requisicao"
 
 
 

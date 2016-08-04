@@ -5,6 +5,7 @@ import json
 def ler_banco():
     #abrindo o arquivo json
     with open("banco.json","r") as f:
+        print type(f.read())
         banco = json.loads(f.read())
     return banco
 

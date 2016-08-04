@@ -5,6 +5,7 @@ import json
 def ler_banco():
     #abrindo o arquivo json
     with open("banco.json","r") as f:
+        #print type(f.read())
         banco = json.loads(f.read())
     return banco
 
@@ -17,22 +18,25 @@ def escrever_banco(dado):
 
 def cadastrar_usuario():
     banco = ler_banco()
+    #{"usuarios": []}
     usuario = {}
     usuario["login"] = raw_input("Digite o usuario: ")
+    #{"login":"Alex"}
     usuario["senha"] = raw_input("Digite a senha: ")
+    #{"login":"Alex","senha":"*****"}
     banco["usuarios"].append(usuario)
-    
+    #{"usuarios": [{"login":"Alex","senha":"*****"}]}
     escrever_banco(banco)
     print("Sysadmin "+ usuario["login"] + " cadastrado")
 
 
 
 def listar_usuario():
-    global usuarios
-    #ENUMERATE (passando i) 
-    #serve para numerar  itens e retornar o numero e o item
-    for i,u in enumerate(usuarios):
-        print("%s - %s"%(i,u))
+    banco = ler_banco()
+    
+    for i,u in enumerate(banco.get("usuarios")):
+        print "%s - %s" %(i, u.get("login"))
+
 
 
 def remover_usuario():

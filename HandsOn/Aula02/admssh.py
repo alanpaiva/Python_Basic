@@ -7,6 +7,14 @@ servidores=[]
 
 
 
+#sudo easy_install pip
+#sudo pip install biblioteca
+#sudo pip install docker-py
+#sudo pip install pip --upgrade
+#pip freeze  (lista as bibliotecas já instaladas
+
+#pipreqs 4520-Python/
+#cat 4520-Python/requirements.txt
 
 
 

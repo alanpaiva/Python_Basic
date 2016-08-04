@@ -1,35 +1,57 @@
-#!/usr/bin//python
+#!/usr/bin/python
 #arquivo: ansible.pyy
 
-#paramiko serve para executar comandos bash
-import paramiko
-#importa biblioteca de datetime
-from datetime import datetime
+#dentro da pasta modulos
+from modulos.SSH import executa_comando
+from modulos.usuarios import cadastrar_usuario, listar_usuario, remover_usuario, autenticar_usuario
+from modulos.servidores import cadastrar_servidor, listar_servidor, remover_servidor
 
 
-client =  paramiko.SSHClient()
+
+#executa_comando("pwd")
 
 
-#le o arquivo know_hosts
-client.load_system_host_keys() 
+def switch(x):
+    try:
+        dicionario_funcoes = {1:cadastrar_usuario,
+                              2:listar_usuario,
+                              3:remover_usuario,
+                              4:cadastrar_servidor,
+                              5:listar_servidor,
+                              6:remover_servidor}
+        dicionario_funcoes[x]()
 
-# aceita o fingerprint automaticamente
-client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    except ValueError as e:
+        print "caracter Invalido"
 
-#conecta na maquina
-client.connect(hostname="127.0.0.1", username="root", password="4linux")
+    except Exception as e:
+        print "Opcao Invalida", e
 
-#executa comando
-log = datetime.now()
-stdin, stdout, stderr = client.exec_command("pwd")
+    finally:
+        print "Processando a requisicao"
 
 
-# No bash do linux, a variavel "$?" retorna o cod de erro.
-# Zero significa que foi executado
-if stderr.channel.recv_exit_status() != 0:
-    print "Falhou: ",stderr.read()
-else:
-    print  stdout.read(), " Executado as ", log
+
+def menu():
+    print("1 -  Cadastrar SysAdmin")
+    print("2 -  Listar SysAdmin")
+    print("3 -  Remover SysAdmin")
+    print("4 -  Cadastrar Servidor")
+    print("5 -  Listar Servidor")
+    print("6 -  Remover Servidor")
+    print("7 -  Sair")
+
+
+
+
+if __name__=="__main__":
+    while True:
+        #opcao = int(raw_input("Digite a opcao desejada: "))
+        opcao = input("Digite a opcao desejada: ")
+        switch(opcao)
+
+
+
 
 
 

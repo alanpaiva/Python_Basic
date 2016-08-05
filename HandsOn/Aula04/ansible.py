@@ -1,6 +1,8 @@
 #!/usr/bin/python
 #arquivo: ansible.pyy
 
+import sys
+
 #dentro da pasta modulos
 from modulos.SSH import executa_comando
 from modulos.usuarios import cadastrar_usuario, listar_usuario, remover_usuario, autenticar_usuario
@@ -18,7 +20,8 @@ def switch(x):
                               3:remover_usuario,
                               4:cadastrar_servidor,
                               5:listar_servidor,
-                              6:remover_servidor}
+                              6:remover_servidor,
+                              7:sair}
         dicionario_funcoes[x]()
 
     except ValueError as e:
@@ -42,10 +45,13 @@ def menu():
     print("7 -  Sair")
 
 
+def sair():
+    sys.exit()
 
 
 if __name__=="__main__":
     while True:
+        menu()
         #opcao = int(raw_input("Digite a opcao desejada: "))
         opcao = input("Digite a opcao desejada: ")
         switch(opcao)

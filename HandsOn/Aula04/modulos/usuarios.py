@@ -37,15 +37,24 @@ def listar_usuario():
     for i,u in enumerate(banco.get("usuarios")):
         print "%s - %s" %(i, u.get("login"))
 
+    #raw_input("Presione enter para coninuar...")
 
 
 def remover_usuario():
-    global usuarios    
-    listar_sysadmin()
+    listar_usuario()
     id = input("Digite o ID que deseja remover: ")
-    print("Usuario " + usuarios[id] + " removido")
-    usuarios.pop(id)
-    senhas.pop(id)
+
+    banco = ler_banco()
+
+    banco["usuarios"].pop(id)
+
+
+    escrever_banco(banco)
+
+    #banco.get("usuarios").get("login")
+
+    #banco.get("usuarios").pop(id)
+
 
 
 def autenticar_usuario(login, senha):

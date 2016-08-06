@@ -6,7 +6,7 @@ import sys
 #dentro da pasta modulos
 from modulos.SSH import executa_comando
 from modulos.usuarios import cadastrar_usuario, listar_usuario, remover_usuario, autenticar_usuario
-from modulos.servidores import cadastrar_servidor, listar_servidor, remover_servidor
+from modulos.servidores import cadastrar_servidor, listar_servidor, remover_servidor, executar_comando_servidor
 
 
 
@@ -21,7 +21,8 @@ def switch(x):
                               4:cadastrar_servidor,
                               5:listar_servidor,
                               6:remover_servidor,
-                              7:sair}
+                              7:executar_comando_servidor,
+                              8:sair}
         dicionario_funcoes[x]()
 
     except ValueError as e:
@@ -42,7 +43,8 @@ def menu():
     print("4 -  Cadastrar Servidor")
     print("5 -  Listar Servidor")
     print("6 -  Remover Servidor")
-    print("7 -  Sair")
+    print("7 -  Executar comando")
+    print("8 -  Sair")
 
 
 def sair():

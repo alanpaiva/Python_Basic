@@ -23,9 +23,9 @@ def executa_comando(cmd):
     # No bash do linux, a variavel "$?" retorna o cod de erro.
     # Zero significa que foi executado
     if stderr.channel.recv_exit_status() != 0:
-        print "Falhou: ",stderr.read()
+        return stderr.read()
     else:
-        print  stdout.read(), " Executado as " #, log + timedelta(7)
+        return stdout.read()
 
 
 

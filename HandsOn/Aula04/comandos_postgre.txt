@@ -1,0 +1,77 @@
+forlinux@developer  ~ $ sudo su - postgres
+postgres@developer:~$ psql
+psql (9.4.5)
+Digite "help" para ajuda.
+
+postgres=# \l
+                                Lista dos bancos de dados
+    Nome    |   Dono   | Codificação |   Collate   |    Ctype    | Privilégios de acesso 
+------------+----------+-------------+-------------+-------------+-----------------------
+ curso501   | curso501 | UTF8        | pt_BR.UTF-8 | pt_BR.UTF-8 | 
+ dexter     | postgres | UTF8        | pt_BR.UTF-8 | pt_BR.UTF-8 | 
+ dexter_502 | postgres | UTF8        | pt_BR.UTF-8 | pt_BR.UTF-8 | 
+ postgres   | postgres | UTF8        | pt_BR.UTF-8 | pt_BR.UTF-8 | 
+ template0  | postgres | UTF8        | pt_BR.UTF-8 | pt_BR.UTF-8 | =c/postgres          +
+            |          |             |             |             | postgres=CTc/postgres
+ template1  | postgres | UTF8        | pt_BR.UTF-8 | pt_BR.UTF-8 | =c/postgres          +
+            |          |             |             |             | postgres=CTc/postgres
+(6 registros)
+
+postgres=# create database loja2;
+CREATE DATABASE
+postgres=# \c loja2
+Você está conectado agora ao banco de dados "loja2" como usuário "postgres".
+loja2=# \dt
+Nenhuma relação foi encontrada.
+loja2=# create table produtos(
+loja2(# id serial,
+loja2(# nome varchar(255),
+loja2(# descricao text,
+loja2(# preco double,
+loja2(# categoria varchar(255));
+ERRO:  tipo "double" não existe
+LINHA 5: preco double,
+               ^
+loja2=# create table produtos(
+id serial,
+nome varchar(255),
+descricao text,
+preco double precicion,
+categoria varchar(255));
+ERRO:  erro de sintaxe em ou próximo a "precicion"
+LINHA 5: preco double precicion,
+                      ^
+loja2=# create table produtos(
+id serial,
+nome varchar(255),
+descricao text,
+preco double precision,
+categoria varchar(255));
+CREATE TABLE
+loja2=# \dt
+           Lista de relações
+ Esquema |   Nome   |  Tipo  |   Dono   
+---------+----------+--------+----------
+ public  | produtos | tabela | postgres
+(1 registro)
+
+loja2=# \d produtos
+                                      Tabela "public.produtos"
+  Coluna   |          Tipo          |                         Modificadores                         
+-----------+------------------------+---------------------------------------------------------------
+ id        | integer                | não nulo valor padrão de nextval('produtos_id_seq'::regclass)
+ nome      | character varying(255) | 
+ descricao | text                   | 
+ preco     | double precision       | 
+ categoria | character varying(255) | 
+
+loja2=# insert into produtos(nome, descricao, preco, categoria) values ('arduino','micro-controlador',49.99,'eletronicos');
+INSERT 0 1
+loja2=# select * from produtos;
+ id |  nome   |     descricao     | preco |  categoria  
+----+---------+-------------------+-------+-------------
+  1 | arduino | micro-controlador | 49.99 | eletronicos
+(1 registro)
+
+loja2=# 
+

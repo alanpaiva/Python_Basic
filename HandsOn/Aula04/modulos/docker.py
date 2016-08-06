@@ -11,7 +11,7 @@ def pegar_ip_container(name):
     return "docker inspect %s" %(name)
 
 def executar_comando(name, cmd):
-    return "docker exec %s bach -c '%s'"%(name, cmd)
+    return "docker exec %s bash -c '%s'"%(name, cmd)
 
 
 

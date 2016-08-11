@@ -4,11 +4,11 @@ from SSH import SSH
 
 class Docker(SSH):
     def __init__(self):
-        SSH.__init__()    
+        SSH.__init__(self)    
 
     def criar(self,name):
         comando="docker run -tdi --name %s --hostname %s ubuntu /bin/bash"%(name,name)
-        return self.executar(comando)
+        return self.executar_comando(comando)
 
     def remover(self,name):
         comando = "docker stop %s && docker rm %s"%(name,name)
@@ -18,7 +18,7 @@ class Docker(SSH):
         comando = "docker inspect %s"%name
         return self.executar_comando(comando)
 
-    def executar_comando(self,name,cmd):
+    def shell(self,name,cmd):
         comando = "docker exec %s bash -c '%s'"%(name,cmd)
         return self.executar_comando(comando)
 

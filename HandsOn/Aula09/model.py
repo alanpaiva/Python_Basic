@@ -48,6 +48,11 @@ class Usuario(Base): #criando tabelas
     senha = Column(String(255))
     servidor = relationship("Servidor", secondary=usuario_servidor)
     token = relationship("Token")
+     #construtor da clase:
+    def __init__(self, usuario_cls):
+        print "Executando construtor de ", __name__
+        self.nome = usuario_cls.login
+        self.senha = usuario_cls.senha
 
 class Servidor(Base): #criando tabelas
     __tablename__ = 'servidor' #cria classe
@@ -55,6 +60,12 @@ class Servidor(Base): #criando tabelas
     nome = Column(String(255))
     descricao = Column(String(255))
     ip = Column(String(255))
+    def __init__(self, servidor_cls):
+        self.nome = servidor_cls.nome
+        self.descricao = servidor_cls.descricao
+        self.ip = servidor_cls.ip
+
+
 
 class Token(Base):
     __tablename__ = "token"
@@ -118,7 +129,7 @@ if __name__ == '__main__':
 
     '''
 
-
+    '''
     novo_token = Token()
     novo_token.motivo = "Atualizacao de servidor"
 
@@ -130,6 +141,6 @@ if __name__ == '__main__':
     session.add(novo_token)
     session.commit()
 
-
+    '''
 
 

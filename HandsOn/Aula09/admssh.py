@@ -2,40 +2,48 @@
 #arquivo ansible.py eh para automatizar tarefas
 
 import sys
-from Modulos.SSH import executa_comando
-from Modulos.usuarios import cadastrar_usuario, listar_usuario, remover_usuario
-from Modulos.servidores import cadastrar_servidor, listar_servidor, remover_servidor
+from Modulos.SSH import SSH
+from Classes.usuarios import Usuario
+from Classes.servidores import Servidor
 
-def switch(x):
-    try:
-        dicionario_funcoes ={1:cadastrar_usuario,
-                             2:listar_usuario,
-                             3:remover_usuario,
-                             4:cadastrar_servidor,
-                             5:listar_servidor,
-                             6:remover_servidor,
-                             7:sair}
-        dicionario_funcoes[x]() 
-    except Exception as e:
-        print "Opcao invalida",e
 
-def menu():
-    print "1- Cadastrar usuario"
-    print "2- Listar usuario"
-    print "3- Remover usuario"
-    print "4- Cadastrar servidores"
-    print "5- Listar servidores"
-    print "6- Remover servidor"
-    print "7- Sair"
+class AdmSSH:
+    def switch(self, x):
+        try:
+            usuario_obj = Usuario()
+            servidor_obj = Servidor()
+            dicionario_funcoes ={1:usuario_obj.cadastrar,
+                                 2:usuario_obj.listar,
+                                 3:usuario_obj.remover,
+                                 4:servidor_obj.cadastrar,
+                                 5:servidor_obj.listar,
+                                 6:servidor_obj.remover,
+                                 7:self.sair
+                                }
+            dicionario_funcoes[x]() 
+        except Exception as e:
+            print "Opcao invalida",e
 
-def sair():
-    sys.exit()
+    def menu(self):
+        print "1- Cadastrar usuario"
+        print "2- Listar usuario"
+        print "3- Remover usuario"
+        print "4- Cadastrar servidores"
+        print "5- Listar servidores"
+        print "6- Remover servidor"
+        print "7- Sair"
+
+    def sair():
+        sys.exit()
 
 if __name__ == '__main__': #defini 2 comportamento dif = 1- linha comando 2-
+    admssh = AdmSSH()
     while True:
-        menu()        
+        admssh.menu()            
         opcao = int(raw_input("<< Digite a opcao desejada: "))
-        switch(opcao)
+        admssh.switch(opcao)
+
+
 
 executa_comando ("ip a")
 

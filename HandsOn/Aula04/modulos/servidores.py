@@ -3,7 +3,7 @@
 import json
 
 from modulos.usuarios import ler_banco, escrever_banco
-from modulos.docker import criar_container, remover_container, pegar_ip_container, executar_comando
+from modulos.docker import criar_container, remover_container, pegar_ip_container, executa_comando
 from modulos.SSH import executa_comando as ssh_comando
 
 

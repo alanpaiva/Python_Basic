@@ -33,7 +33,7 @@ class AdmSSH:
         print "6- Remover servidor"
         print "7- Sair"
 
-    def sair():
+    def sair(self):
         sys.exit()
 
 if __name__ == '__main__': #defini 2 comportamento dif = 1- linha comando 2-

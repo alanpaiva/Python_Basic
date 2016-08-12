@@ -44,7 +44,7 @@ class Servidores:
 
         #cmd = executar_comando(name,cmd)
         docker = Docker()
-        docker.shell(servidor.nome, cmd)
+        print docker.shell(servidor.nome, cmd)
 
 
     def remover(self):

@@ -1,5 +1,10 @@
 #!/bin/python
 
+#comando para apagar todos os dockers criados
+# docker rm -f $(docker ps -a)
+
+
+
 from SSH import SSH
 
 class Docker(SSH):
@@ -12,6 +17,7 @@ class Docker(SSH):
 
     def remover(self,name):
         comando = "docker stop %s && docker rm %s"%(name,name)
+        print comando
         return self.executar_comando(comando)
 
     def pegar_ip(self,name):
@@ -21,6 +27,7 @@ class Docker(SSH):
     def shell(self,name,cmd):
         comando = "docker exec %s bash -c '%s'"%(name,cmd)
         return self.executar_comando(comando)
+
 
 
 

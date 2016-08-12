@@ -39,18 +39,25 @@ class Servidores:
     def exec_comando_servidor(self):
         self.listar()
         servidor_id  = input("Digite o id do servidor: ")
-        name = banco["servidores"][servidor_id]["hostname"]
+        servidor = session.query(ServidorModel).filter_by(id=servidor_id).first()
         cmd = raw_input("Digite o comando a ser executado: ")
-        cmd = executar_comando(name,cmd)
-        ssh_comando(cmd)
+
+        #cmd = executar_comando(name,cmd)
+        docker = Docker()
+        docker.shell(servidor.nome, cmd)
+
 
     def remover(self):
+        docker = Docker()
         self.listar()
         servidor_id  = input("Digite o id do servidor: ")
-        
+
+
         try:
             servidor = session.query(ServidorModel) \
                               .filter_by(id=servidor_id).first()
+            docker.remover(servidor.nome)
+
             session.delete(servidor)
             session.commit()
             print "Servidor removido com sucesso!"

@@ -29,12 +29,13 @@ class AdmSSH:
         print "4 - cadastrar servidor"
         print "5 - listar servidores"
         print "6 - remover servidor"
-        print "7 - Sair"
+        print "7 - Executar comando"
 
 if __name__ == '__main__':
     admssh = AdmSSH()
-    admssh.menu()
+    
     while True:
+        admssh.menu()
         opcao = int(raw_input("Digite a opcao desejada: "))
         admssh.switch(opcao)
 
